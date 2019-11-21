@@ -3,12 +3,20 @@
 
   <v-app>
     <v-navigation-drawer app temporary v-model="drawer">
-      <!-- -->
+      <v-btn class="ma-3" text icon absolute right @click="drawer = !drawer">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <v-btn class="mx-auto mt-10" :href="'/'" large text>
+        <v-icon left>mdi-home</v-icon>
+        На главную
+      </v-btn>
     </v-navigation-drawer>
 
     <v-app-bar app dark color="primary">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title class="headline text-truncate orange--text darken-3 text-uppercase font-weight-bold">
+      <v-toolbar-title
+        class="headline text-truncate orange--text darken-3 text-uppercase font-weight-bold"
+      >
         Когнитивные тесты для самостоятельной проверки
       </v-toolbar-title>
     </v-app-bar>
@@ -18,44 +26,47 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <v-row align-center justify-center>
-            <Card>
-              <template v-slot:general>
-                <Depression />
-              </template>
-              <template v-slot:description>
-                {{ description.depression }}
-              </template>
-            </Card>
-            <Card>
-              <template v-slot:general>
-                <Asthenia />
-              </template>
-              <template v-slot:description>
-                {{ description.asthenia }}
-              </template>
-            </Card>
-            <Card>
-              <template v-slot:general>
-                <Sleep />
-              </template>
-              <template v-slot:description>
-                {{ description.sleep }}
-              </template>
-            </Card>
-            <Card>
-              <template v-slot:general>
-                <Stress />
-              </template>
-              <template v-slot:description>
-                {{ description.stress }}
-              </template>
-            </Card>
+          <Card>
+            <template v-slot:general>
+              <Depression />
+            </template>
+            <template v-slot:description>
+              {{ description.depression }}
+            </template>
+          </Card>
+          <Card>
+            <template v-slot:general>
+              <Asthenia />
+            </template>
+            <template v-slot:description>
+              {{ description.asthenia }}
+            </template>
+          </Card>
+          <Card>
+            <template v-slot:general>
+              <Sleep />
+            </template>
+            <template v-slot:description>
+              {{ description.sleep }}
+            </template>
+          </Card>
+          <Card>
+            <template v-slot:general>
+              <Stress />
+            </template>
+            <template v-slot:description>
+              {{ description.stress }}
+            </template>
+          </Card>
         </v-row>
       </v-container>
     </v-content>
 
     <v-footer app>
-      <span class="overline">Разработка раздела "Анкеты" &copy; <a href="mailto:kachid76@gmail.com">М.Кахидзе</a></span>
+      <span class="overline"
+        >Разработка раздела "Анкеты" &copy;
+        <a href="mailto:kachid76@gmail.com">М.Кахидзе</a></span
+      >
     </v-footer>
   </v-app>
 </template>
