@@ -1,12 +1,12 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600">
+  <v-dialog v-model="dialog" persistent max-width="600" content-class="grey lighten-5">
     <template v-slot:activator="{ on }">
-      <v-btn class="title" text small color="primary" v-on="on">
+      <v-btn class="title" text small color="#1A9EA6" v-on="on">
         Тестирование уровня стресса
       </v-btn>
     </template>
     <v-card class="elevation-6">
-      <v-toolbar color="primary" dark flat justify="space-between">
+      <v-toolbar color="#1A9EA6" dark flat justify="space-between">
         <v-toolbar-title class="title font-weight-medium">
           Шкала психологического стресса
         </v-toolbar-title>

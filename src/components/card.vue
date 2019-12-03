@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <v-card class="mx-auto" max-width="400" shaped hover>
+    <v-card class="mx-auto" max-width="400">
       <v-card-title>
         <slot name="general" />
       </v-card-title>

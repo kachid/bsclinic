@@ -12,10 +12,10 @@
       </v-btn>
     </v-navigation-drawer>
 
-    <v-app-bar app dark color="primary">
+    <v-app-bar app dark color="#1A9EA6">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title
-        class="headline text-truncate orange--text darken-3 text-uppercase font-weight-bold"
+        class="headline text-truncate text-uppercase font-weight-bold"
       >
         Когнитивные тесты для самостоятельной проверки
       </v-toolbar-title>
