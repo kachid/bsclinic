@@ -116,7 +116,7 @@ export default {
           value: this.sumP,
           rules: this.rules
         }
-      ]
+      ];
     }
   },
   methods: {

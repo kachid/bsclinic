@@ -1,14 +1,19 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600" content-class="grey lighten-5">
+  <v-dialog
+    v-model="dialog"
+    persistent
+    max-width="600"
+    content-class="grey lighten-5"
+  >
     <template v-slot:activator="{ on }">
       <v-btn class="title" text small color="#1A9EA6" v-on="on">
-        {{nameOfTest}}
+        {{ nameOfTest }}
       </v-btn>
     </template>
     <v-card class="elevation-6">
       <v-toolbar color="#1A9EA6" dark flat justify="space-between">
         <v-toolbar-title class="title font-weight-medium">
-          {{header}}
+          {{ header }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
@@ -156,7 +161,7 @@ export default {
       } else {
         if (this.maxPage === allAnswers) {
           this.addChoice(this.currentChoice);
-          this.$emit('give-qwestions', this.questions);
+          this.$emit("give-qwestions", this.questions);
           this.page++;
         } else {
           this.showAlert();
@@ -180,9 +185,7 @@ export default {
       this.currentChoice = this.choices[this.currentQuestion];
     }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

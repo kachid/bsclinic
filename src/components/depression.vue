@@ -58,7 +58,7 @@ export default {
           rules: this.rules,
           result: this.resultD
         }
-      ]
+      ];
     }
   },
   methods: {

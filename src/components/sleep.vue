@@ -53,7 +53,7 @@ export default {
           rules: this.rulesForSumAll,
           result: this.resultAll
         }
-      ]
+      ];
     }
   },
   methods: {
