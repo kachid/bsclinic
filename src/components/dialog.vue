@@ -53,7 +53,7 @@
                 thumb-label="always"
                 color="orange darken-3"
               ></v-slider>
-              <p v-if="i === 0">{{ resultAll }}</p>
+              <p v-if="slider.result">{{ slider.result }}</p>
             </v-card-text>
             <v-divider></v-divider>
           </div>
@@ -71,10 +71,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn v-if="page < maxPage" @click="next" color="primary">
+        <v-btn v-if="page < maxPage" @click="next" color="#1A9EA6" dark>
           дальше
         </v-btn>
-        <v-btn v-if="page === maxPage" @click="beforeEnd" color="primary">
+        <v-btn v-if="page === maxPage" @click="beforeEnd" color="#1A9EA6" dark>
           результат
         </v-btn>
       </v-card-actions>
@@ -82,6 +82,7 @@
     <div v-if="page <= maxPage" class="text-center mt-5">
       <v-pagination
         v-model="page"
+        color="#1A9EA6"
         :length="maxPage"
         :total-visible="7"
       ></v-pagination>
@@ -118,9 +119,6 @@ export default {
     },
     sliders: {
       type: Array
-    },
-    resultAll: {
-      default: "0"
     }
   },
   data: () => ({

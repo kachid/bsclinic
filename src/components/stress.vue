@@ -1,110 +1,23 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="600" content-class="grey lighten-5">
-    <template v-slot:activator="{ on }">
-      <v-btn class="title" text small color="#1A9EA6" v-on="on">
-        Тестирование уровня стресса
-      </v-btn>
-    </template>
-    <v-card class="elevation-6">
-      <v-toolbar color="#1A9EA6" dark flat justify="space-between">
-        <v-toolbar-title class="title font-weight-medium">
-          Шкала психологического стресса
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn text icon @click="close">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar-items>
-      </v-toolbar>
-      <v-card-text>
-        <v-form v-if="page <= maxPage">
-          <v-radio-group v-model="currentChoice" column>
-            <p
-              class="light-blue--text
-                    text--darken-3
-                    text-uppercase
-                    font-weight-medium"
-            >
-              {{ questions[currentQuestion].q }}
-            </p>
-            <v-radio
-              v-for="a in questions[currentQuestion].a"
-              :key="a.id"
-              :label="a.answer"
-              class="title"
-              color="orange darken-3"
-              :value="a.id"
-            ></v-radio>
-          </v-radio-group>
-        </v-form>
-        <v-card v-else flat color="transparent">
-          <!-- SLIDERS -->
-          <v-card-text class="my-3 body-1">
-            <v-slider
-              inverse-label
-              readonly
-              min="25"
-              max="200"
-              label="Общая сумма баллов"
-              :value="sumAll"
-              :rules="rulesForSumAll"
-              thumb-label="always"
-              color="orange darken-3"
-            ></v-slider>
-            <p>{{ this.resultAll }}</p>
-          </v-card-text>
-          <v-divider v-if="isAlarm"></v-divider>
-          <v-card-text v-if="isAlarm">
-            <p>
-              По результатам Вам рекомендовано обратиться к врачу-неврологу.
-            </p>
-            <p>
-              Для записи к специалисту в нашей клинике позвоните по телефону
-              <a href="tel:+79827371930">+7(982)737-19-30</a>
-            </p>
-          </v-card-text>
-        </v-card>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn v-if="page < maxPage" @click="next" color="primary">
-          дальше
-        </v-btn>
-        <v-btn v-if="page === maxPage" @click="beforeEnd" color="primary">
-          результат
-        </v-btn>
-      </v-card-actions>
-    </v-card>
-    <div v-if="page <= maxPage" class="text-center mt-5">
-      <v-pagination
-        v-model="page"
-        :length="maxPage"
-        :total-visible="7"
-      ></v-pagination>
-    </div>
-    <!-- SNACKBAR -->
-    <v-snackbar
-      class="text-center body-1"
-      v-model="snackbar"
-      :timeout="timeout"
-      color="red"
-    >
-      Нужно выбрать вариант ответа
-    </v-snackbar>
-  </v-dialog>
+  <Dialog
+    nameOfTest="Тестирование уровня стресса"
+    header="Шкала психологического стресса"
+    :maxPage="maxPage"
+    :questions="questions"
+    :sliders="sliders"
+    :isAlarm="isAlarm"
+  />
 </template>
 <script>
+import Dialog from "@/components/dialog";
+
 export default {
+  components: {
+    Dialog
+  },
   data: () => ({
     questions: que,
-    choices: [],
-    currentChoice: null,
-    page: 1,
     results: outcome,
-    snackbar: false,
-    timeout: 2000,
-    dialog: false,
     rulesForSumAll: [v => v < 100 || ""]
   }),
   computed: {
@@ -128,42 +41,21 @@ export default {
     },
     isAlarm() {
       return this.sumAll > 100;
+    },
+    sliders() {
+      return [
+        {
+          min: "25",
+          max: "200",
+          label: "Общая сумма баллов",
+          value: this.sumAll,
+          rules: this.rulesForSumAll,
+          result: this.resultAll
+        }
+      ]
     }
   },
   methods: {
-    next() {
-      if (typeof this.currentChoice === "number") {
-        this.choices[this.currentQuestion] = this.currentChoice;
-        this.addChoice(this.currentChoice);
-        this.currentChoice = null;
-        this.page++;
-      } else {
-        this.showAlert();
-      }
-    },
-    beforeEnd() {
-      let allAnswers =
-        this.choices.filter(item => typeof item === "number").length + 1;
-
-      if (!(typeof this.currentChoice === "number")) {
-        this.showAlert();
-      } else {
-        if (this.maxPage === allAnswers) {
-          this.addChoice(this.currentChoice);
-          this.page++;
-        } else {
-          this.showAlert();
-        }
-      }
-    },
-    addChoice(choice) {
-      let arr = this.questions,
-        index = this.currentQuestion;
-
-      let answer = arr[index].a.find(item => item.id === choice);
-
-      arr[index].choice = answer.points;
-    },
     sumOfPoints(key) {
       let arr = [...this.questions].filter(item => item.type === key);
 
@@ -180,17 +72,6 @@ export default {
         result = this.results[1] + key;
       }
       return result;
-    },
-    showAlert() {
-      this.snackbar = true;
-    },
-    close() {
-      this.dialog = false;
-    }
-  },
-  watch: {
-    page() {
-      this.currentChoice = this.choices[this.currentQuestion];
     }
   }
 };

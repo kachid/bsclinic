@@ -6,7 +6,6 @@
     :questions="questions"
     :sliders="sliders"
     :isAlarm="isAlarm"
-    :resultAll="resultAll"
   />
 </template>
 <script>
@@ -23,9 +22,6 @@ export default {
     rulesForSumAll: [v => v <= 20 || ""]
   }),
   computed: {
-    currentQuestion() {
-      return this.page - 1;
-    },
     maxPage() {
       return this.questions.length;
     },
@@ -82,7 +78,8 @@ export default {
           max: "100",
           label: "Общая сумма баллов",
           value: this.sumAll,
-          rules: this.rulesForSumAll
+          rules: this.rulesForSumAll,
+          result: this.resultAll
         },
         {
           min: "0",
