@@ -25,7 +25,7 @@
     <v-content>
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
-        <v-row align-center justify-center>
+        <v-row>
           <Card>
             <template v-slot:general>
               <Depression />
@@ -58,6 +58,14 @@
               {{ description.stress }}
             </template>
           </Card>
+          <Card>
+            <template v-slot:general>
+              <Anxiety />
+            </template>
+            <template v-slot:description>
+              {{ description.anxiety }}
+            </template>
+          </Card>
         </v-row>
       </v-container>
     </v-content>
@@ -77,6 +85,7 @@ import Depression from "@/components/depression";
 import Asthenia from "@/components/asthenia";
 import Sleep from "@/components/sleep";
 import Stress from "@/components/stress";
+import Anxiety from "@/components/anxiety";
 
 export default {
   name: "App",
@@ -85,7 +94,8 @@ export default {
     Depression,
     Asthenia,
     Sleep,
-    Stress
+    Stress,
+    Anxiety
   },
   data: () => ({
     drawer: false,
@@ -101,6 +111,8 @@ const description = {
   sleep:
     "Сон призван обеспечивать оптимальное взаимодействие организма с окружающей средой, подготавливая его к успешной деятельности в период предстоящего бодрствования.",
   stress:
-    "Шкала PSM–25 Лемура–Тесье–Филлиона предназначена для измерения феноменологической структуры переживаний стресса. Перевод и адаптация русского варианта методики выполнены Н. Е. Водопьяновой."
+    "Шкала PSM–25 Лемура–Тесье–Филлиона предназначена для измерения феноменологической структуры переживаний стресса. Перевод и адаптация русского варианта методики выполнены Н. Е. Водопьяновой.",
+  anxiety:
+    "Тревога относится к числу фундаментальных эмоциональных состояний. Являясь одним из обязательных проявлений стресса, тревога выполняет как защитную, так и дестабилизирующую функцию. Методика оценки разработана в НИИ им. В.М. Бехтерева Санкт-Петербург."
 };
 </script>
